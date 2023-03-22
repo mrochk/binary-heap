@@ -5,21 +5,44 @@
 using namespace std;
 
 int main() {
-    srand(time(nullptr));
+  srand(time(nullptr));
+  int n_to_insert = 100'000;
 
-    // Creating a new empty min Heap of Integers.
-    Heap<int> *h = new Heap<int>;
+  cout << "Creating a Min-Heap:\n\n";
+  Heap<int> *min_heap = new Heap<int>;
 
-    // Inserting 1000 random integers.
-    for (int i = 1000; i > 0; --i) h->insert(new Node<int>(rand() % 1000001));
+  cout << "Inserting 100000 random integers in the Min-Heap...\n\n";
+  cout.flush();
+  for (int i = n_to_insert; i > 0; --i)
+    min_heap->insert(new Node<int>(rand() % 1000001));
 
-    // Removing and printing the top element.
-    for (int i = 0; i < 3; ++i) {
-        cout << "Top Element => " << h->pop_top() << '\n';
-        cout << "Heap Size => " << h->get_size() << "\n";
-        cout << "_____\n";
-    }
+  // Removing and printing the top element.
+  for (int i = 0; i < 3; ++i) {
+    cout << "Removing the top element.\n";
+    cout << "Top Element => " << min_heap->pop_top() << '\n';
+    cout << "Heap Size => " << min_heap->get_size() << "\n";
+    cout << "_____\n";
+  }
 
-    delete (h);
-    return 0;
+  delete (min_heap);
+
+  cout << "\nCreating a Max-Heap:\n\n";
+  Heap<int> *max_heap = new Heap<int>([](int a, int b) { return a < b; });
+
+  cout << "Inserting 100000 random integers in the Max-Heap...\n\n";
+  cout.flush();
+  for (; n_to_insert > 0; --n_to_insert)
+    max_heap->insert(new Node<int>(rand() % 1000001));
+
+  // Removing and printing the top element.
+  for (int i = 0; i < 3; ++i) {
+    cout << "Removing the top element.\n";
+    cout << "Top Element => " << max_heap->pop_top() << '\n';
+    cout << "Heap Size => " << max_heap->get_size() << "\n";
+    cout << "_____\n";
+  }
+
+  delete (max_heap);
+
+  return EXIT_SUCCESS;
 }
