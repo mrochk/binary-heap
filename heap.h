@@ -18,8 +18,11 @@ public:
   /* The data the user wants to store. */
   T data;
 
-  /* The node's children. */
-  Node *left, *right;
+  /* The node's left child. */
+  Node *left;
+
+  /* The node's right child. */
+  Node *right;
 
   /****************************************************************************/
 
@@ -32,8 +35,10 @@ public:
   /* Returns the children corresponding to the given direction. */
   Node *get_child(Direction d);
 
-  /* Inserts a children as left or right child, depending on the direction. */
-  void insert(Direction d, Node<T> *n);
+  /* Inserts a children as left or right child, depending on the direction. 
+     @param direction Where we should insert the child node : L or R. 
+     @param node The node to insert. */
+  void insert(Direction direction, Node<T> *node);
 
   /* Deletes the node and his children, recursively. */
   ~Node();
@@ -41,17 +46,18 @@ public:
 
 template <typename T> class Heap {
 public:
-  /* Creates a new empty (default: min) heap. */
+  /* Creates a new empty (min) heap. */
   Heap();
 
   /* Creates a new empty heap that uses compare(a, b) to prioritise elements.
    * @param compare Should return true if priority(a) < priority(b).*/
   Heap(bool (*compare)(T, T));
 
-  /* Gets the number of nodes in the heap. */
+  /* Returns the number of nodes in the heap. */
   uint get_size();
 
-  /* Inserts a new node in the heap. */
+  /* Inserts a new node in the heap. 
+     @param node The node to insert. */
   void insert(Node<T> *node);
 
   /* Deletes and returns the top element. */
