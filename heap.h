@@ -58,7 +58,7 @@ public:
 
   /* Inserts a new node in the heap. 
      @param node The node to insert. */
-  void insert(Node<T> *node);
+  void insert(T element);
 
   /* Deletes and returns the top element. */
   T pop_top();
@@ -148,12 +148,12 @@ template <typename T> Heap<T>::Heap(bool compare(T, T)) {
   tree = EMPTY;
 }
 
-template <typename T> void Heap<T>::insert(Node<T> *node) {
+template <typename T> void Heap<T>::insert(T element) {
+  Node<T>* node = new Node<T>(element);
   uint size = ++this->size;
   std::stack<Direction> dirlist = get_dirlist(size);
   insert_leaf(node, size, dirlist);
-  if (size > 1)
-    bubble_up(dirlist);
+  if (size > 1) bubble_up(dirlist);
 }
 
 template <typename T> std::stack<Direction> Heap<T>::get_dirlist(uint n) {

@@ -14,7 +14,7 @@ int main() {
   cout << "Inserting 100000 random integers in the Min-Heap...\n\n";
   cout.flush();
   for (int i = n_to_insert; i > 0; --i)
-    min_heap->insert(new Node<int>(rand() % 1000001));
+    min_heap->insert(rand() % 1000001);
 
   // Removing and printing the top element.
   for (int i = 0; i < 3; ++i) {
@@ -33,7 +33,7 @@ int main() {
   cout << "Inserting 100000 random integers in the Max-Heap...\n\n";
   cout.flush();
   for (; n_to_insert > 0; --n_to_insert)
-    max_heap->insert(new Node<int>(rand() % 1000001));
+    max_heap->insert(rand() % 1000001);
 
   // Removing and printing the top element.
   for (int i = 0; i < 3; ++i) {
