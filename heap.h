@@ -10,73 +10,67 @@
 #define EMPTY nullptr
 #define DEFAULT_HEAP_SIZE 0
 
-/* Type to represent paths in binary-trees. */
+/* Type to represent path in binary-tree. */
 typedef enum { L, R } Direction;
 
-/* Nodes used in the heap. */
+/* Node used in the heap. */
 template <typename T>
 class Node {
    public:
-    /* The data the user wants to store. */
+    /* Data to store. */
     T data;
 
-    /* The node's left child. */
+    /* Children. */
     Node *left;
-
-    /* The node's right child. */
     Node *right;
 
     /****************************************************************************/
 
-    /* Intantiates a leaf. */
+    /* Intantiate a leaf. */
     Node(T data);
 
-    /* Intantiates an internal node. */
+    /* Intantiate an internal node. */
     Node(T data, Node *left, Node *right);
 
-    /* Returns the children corresponding to the given direction. */
+    /* Return the corresponding children. */
     Node *get_child(Direction d);
 
-    /* Inserts a children as left or right child, depending on the direction.
-       @param direction Where we should insert the child node : L or R.
-       @param node The node to insert. */
+    /* Insert a children depending on the direction. */
     void insert(Direction direction, Node<T> *node);
 
-    /* Deletes the node and his children, recursively. */
+    /* Delete the node and his children, recursively. */
     ~Node();
 };
 
 template <typename T>
 class Heap {
    public:
-    /* Creates a new empty (min) heap. */
+    /* Create a new empty (min) heap. */
     Heap();
 
-    /* Creates a new empty heap that uses compare(a, b) to prioritise elements.
-     * @param compare Should return true if priority(a) < priority(b).*/
+    /* Create a new empty heap that uses compare(a, b) to prioritize elements. */
     Heap(bool (*compare)(T, T));
 
-    /* Returns the number of nodes in the heap. */
+    /* Return the number of nodes in the heap. */
     uint get_size();
 
-    /* Inserts a new node in the heap.
-       @param node The node to insert. */
+    /* Insert a new node in the heap. */
     void insert(T element);
 
-    /* Deletes and returns the top element. */
+    /* Delete and return the top element. */
     T pop_top();
 
-    /* Returns the top element. */
+    /* Return the top element. */
     T get_top();
 
-    /* Deletes the heap and his tree. */
+    /* Delete the heap. */
     ~Heap();
 
    private:
     /* The heap binary-tree. */
     Node<T> *tree;
 
-    /* The number of nodes in the heap binary-tree. */
+    /* The number of nodes in the heap. */
     uint size;
 
     /* The function used to compare two elements. Should return true if
@@ -85,26 +79,25 @@ class Heap {
 
     /****************************************************************************/
 
-    /* Get the directions to get to the last leaf in a
-     * quasi-perfect binary-tree of size n.
-     */
+    /* Get the directions to get to the last leaf in a quasi perfect 
+       binary-tree of size n. */
     std::stack<Direction> get_dirlist(uint n, std::stack<Direction> = {});
 
     /* Insert a node as leaf after following a list of directions. */
     void insert_leaf(Node<T> *tree, Node<T> *to_insert,
                      std::stack<Direction> dirlist);
 
-    /* Bubble-up a leaf until it restablishes the heap property. */
+    /* Bubble-up a leaf until it restores the heap property. */
     void bubble_up(std::stack<Direction> &dirlist);
     void _bubble_up(Node<T> *node, std::stack<Direction> &dirlist);
 
-    /* Swap two nodes of the heap. */
+    /* Swap two nodes. */
     void swap_nodes(Node<T> *a, Node<T> *b);
 
-    /* Deletes from the heap and returns the leaf located at this path. */
+    /* Delete from the heap and return the leaf located at this path. */
     T pop_leaf(Node<T> *node, std::stack<Direction> dirlist);
 
-    /* Bubbles down the root node until the heap property is restablished. */
+    /* Bubble-down the root until the heap property is restored. */
     void bubble_down(Node<T> *node);
 };
 
