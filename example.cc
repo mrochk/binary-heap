@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 
-#include "heap.h"
+#include "heap.hh"
 
 using namespace std;
 
@@ -26,7 +26,7 @@ int main() {
     delete (min_heap);
 
     cout << "\nCreating a Max-Heap:\n\n";
-    auto compare        = [](int a, int b) { return a < b; };
+    auto       compare  = [](int a, int b) { return a < b; };
     Heap<int> *max_heap = new Heap<int>(compare);
 
     cout << "Inserting 100000 random integers in the Max-Heap...\n\n";
