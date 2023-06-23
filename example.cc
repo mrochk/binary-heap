@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 
-#include "heap.hh"
+#include "heap.h"
 
 using namespace std;
 
