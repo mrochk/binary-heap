@@ -1,6 +1,8 @@
 .RECIPEPREFIX = >
 
+all: example
+
 example:
 > @mkdir -p bin
-> @g++ -Wall -Werror -O1 -std=c++17 heap.h example.cc -o bin/example
+> @g++ -Wall -Werror -O1 -pedantic -std=c++17 binary_heap.hpp example.cc -o bin/example
 > @./bin/example
